@@ -42,6 +42,7 @@ You can find out more on how to install Composer, configure autoloading, and oth
 
 ```php
 use Kuna\Connector;
+
 $timestamp = Connector::timestamp(); //1466486485
 
 ```
