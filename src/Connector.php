@@ -17,11 +17,12 @@ use Kuna\Exception\KunaException;
  */
 class Connector
 {
-
 	/**
 	 * @param $path
 	 * @param array $params
 	 * @param string $method
+	 *
+	 * @return array|null
 	 */
 	public static function execute($path, array $params = [], $method = "GET")
 	{
@@ -81,6 +82,43 @@ class Connector
 
 		return (int)$result;
 	}
+
+
+	/**
+	 * @param string $market
+	 *
+	 * @return array|null
+	 */
+	public static function tickers($market = Config::MARKET_BTCUAH)
+	{
+		$result = self::execute("tickers/{$market}");
+		return $result;
+	}
+
+	/**
+	 * @param string $market
+	 *
+	 * @return array|null
+	 */
+	public static function order_book($market = Config::MARKET_BTCUAH)
+	{
+		$result = self::execute("order_book", ['market' => $market]);
+		return $result;
+	}
+
+	/**
+	 * @param string $market
+	 *
+	 * @return array|null
+	 */
+	public static function trades($market = Config::MARKET_BTCUAH)
+	{
+		$result = self::execute("trades", ['market' => $market]);
+		return $result;
+	}
+
+
+
 
 
 }
