@@ -52,25 +52,26 @@ class Connector
 			return null;
 		}
 
-		$body = $response->getBody();
-
-		if ($response->getStatusCode() !== "200")
+		if ($response->getStatusCode() !== 200)
 		{
 			return null;
 		}
 
-		if (empty($body))
+		$body = $response->getBody();
+		$contents = $body->getContents();
+
+		if (empty($contents))
 		{
 			throw new EmptyResultException();
 		}
 
-		$obj = json_decode($body, true);
+		$obj = json_decode($contents, true);
 		if (empty($obj))
 		{
-			throw new KunaException("JSON decode failed, content: " . $body);
+			throw new KunaException("JSON decode failed, content: " . $contents);
 		}
 
-		return $body;
+		return $obj;
 	}
 
 	/**
