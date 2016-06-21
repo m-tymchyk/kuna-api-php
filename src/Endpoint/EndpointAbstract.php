@@ -31,9 +31,20 @@ abstract class EndpointAbstract
 	 *
 	 * @param Client $client
 	 */
-	public function __construct($client = null)
+	public function __construct(Client $client = null)
+	{
+		if($client) $this->setClient($client);
+	}
+
+	/**
+	 * @param Client $client
+	 *
+	 * @return $this
+	 */
+	public function setClient(Client $client)
 	{
 		$this->client = $client;
+		return $this;
 	}
 
 	/**

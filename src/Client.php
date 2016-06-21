@@ -90,5 +90,21 @@ class Client extends Connector
 		$this->publicKey = $key;
 		return $this;
 	}
+
+	/**
+	 * @return string
+	 */
+	public function getSecretKey()
+	{
+		return $this->secretKey;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getPublicKey()
+	{
+		return $this->publicKey;
+	}
 	
 }

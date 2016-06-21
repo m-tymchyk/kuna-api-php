@@ -16,7 +16,7 @@ class PublicMethod extends EndpointAbstract
 	/**
 	 * PublicMethod constructor.
 	 *
-	 * @param \Kuna\Client|null $client
+	 * @param \Kuna\Client $client
 	 */
 	public function __construct($client)
 	{

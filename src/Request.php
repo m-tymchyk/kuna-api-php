@@ -25,7 +25,7 @@ class Request
 	/**
 	 * @var integer
 	 */
-	protected $tones;
+	protected $tonce;
 
 	/**
 	 * Request constructor.
@@ -66,10 +66,17 @@ class Request
 	}
 
 	/**
-	 * @return mixed
+	 * @param bool $sort
+	 *
+	 * @return string
 	 */
-	public function buildParams()
+	public function buildParams($sort = false)
 	{
+		if ($sort)
+		{
+			ksort($this->params);
+		}
+
 		return http_build_query($this->params);
 	}
 
@@ -97,16 +104,34 @@ class Request
 	{
 		$add = [$key => $value];
 		$this->params = array_merge_recursive($this->options, $add);
+
 		return $this;
 	}
 
 	/**
-	 * @param $publicKey
-	 * @param $secretKey
+	 * @param string $publicKey
+	 * @param string $secretKey
+	 *
+	 * @return bool
 	 */
 	public function subscribeSignature($publicKey, $secretKey)
 	{
+		$this
+			->setParam("access_key", $publicKey)
+			->setParam("tonce", $this->tonce);
 
+		$prm =
+			[
+				$this->getMethod(),
+				Constant::BASE_PATH . "/" . $this->getPath(),
+				$this->buildParams(true)
+			];
+
+		$signature = bin2hex(hash_hmac('SHA256', implode("|", $prm), $secretKey));
+
+		$this->setParam('signature', $signature);
+
+		return true;
 	}
 
 	/**
