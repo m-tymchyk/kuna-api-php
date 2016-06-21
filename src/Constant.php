@@ -2,14 +2,14 @@
 
 
 /**
- * Class Config
+ * Class Constant
  * @package Kuna
  *
  * Created by PhpStorm.
  * User: Tymchyk Maksym
  *
  */
-class Config
+class Constant
 {
 	const HOST = 'https://kuna.io';
 	const BASE_PATH = "api/v2";

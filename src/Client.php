@@ -13,27 +13,82 @@
 class Client extends Connector
 {
 
-	protected $api_key;
-	protected $api_secret;
+	/**
+	 * @var string
+	 */
+	protected $publicKey;
+
+	/**
+	 * @var string
+	 */
+	protected $secretKey;
+
+	/**
+	 * @var Endpoint\PrivateMethod
+	 */
+	protected $privateEndpoint;
+
+	/**
+	 * @var Endpoint\PublicMethod
+	 */
+	protected $publicEndpoint;
 
 	/**
 	 * Client constructor.
 	 *
-	 * @param $api_key
-	 * @param $api_secret
+	 * @param $apiKey
+	 * @param $apiSecret
 	 */
-	public function __construct($api_key, $api_secret)
+	public function __construct(array $options = null)
 	{
-		$this->api_key = $api_key;
-		$this->api_secret = $api_secret;
+		$this->publicKey = isset($options['publicKey']) ? $options['publicKey'] : null;
+		$this->secretKey = isset($options['secretKey']) ? $options['secretKey'] : null;
 	}
 
 	/**
-	 * @return int
+	 * @return Endpoint\PrivateMethod
 	 */
-	protected static function tonce()
+	public function private()
 	{
-		return intval(microtime(true) * 1000);
+		if( empty($this->privateEndpoint) )
+		{
+			$this->privateEndpoint = new Endpoint\PrivateMethod($this);
+		}
+		return $this->privateEndpoint;
+	}
+
+	/**
+	 * @return Endpoint\PublicMethod
+	 */
+	public function public()
+	{
+		if( empty($this->publicEndpoint) )
+		{
+			$this->publicEndpoint = new Endpoint\PublicMethod($this);
+		}
+		return $this->publicEndpoint;
+	}
+
+	/**
+	 * @param string $key
+	 *
+	 * @return $this
+	 */
+	public function setSecretKey($key)
+	{
+		$this->secretKey = $key;
+		return $this;
+	}
+
+	/**
+	 * @param string $key
+	 *
+	 * @return $this
+	 */
+	public function setPublicKey($key)
+	{
+		$this->publicKey = $key;
+		return $this;
 	}
 	
 }

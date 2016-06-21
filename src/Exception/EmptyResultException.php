@@ -7,4 +7,5 @@
  */
 class EmptyResultException extends KunaException
 {
+
 }

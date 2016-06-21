@@ -52,7 +52,7 @@ $timestamp = Connector::timestamp(); //1466486485
 ```php
 use Kuna\Connector;
 
-$tickers = Connector::tickers(Config::MARKET_BTCUAH);
+$tickers = Connector::tickers(Constant::MARKET_BTCUAH);
 print_r($tickers);
 ```
 
@@ -76,7 +76,7 @@ Result:
 ```php
 use Kuna\Connector;
 
-$order_book = Connector::order_book(Config::MARKET_BTCUAH);
+$order_book = Connector::order_book(Constant::MARKET_BTCUAH);
 print_r($order_book);
 ```
 
@@ -126,7 +126,7 @@ Result:
 ```php
 use Kuna\Connector;
 
-$trades = Connector::trades(Config::MARKET_BTCUAH);
+$trades = Connector::trades(Constant::MARKET_BTCUAH);
 print_r($trades);
 ```
 

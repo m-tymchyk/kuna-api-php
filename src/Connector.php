@@ -1,8 +1,10 @@
 <?php namespace Kuna;
 
 
+use Endpoint\EndpointAbstract;
 use GuzzleHttp\Exception\ClientException;
 use Kuna\Exception\EmptyResultException;
+use Kuna\Exception\EndpointException;
 use Kuna\Exception\KunaException;
 
 /**
@@ -17,34 +19,29 @@ use Kuna\Exception\KunaException;
  */
 class Connector
 {
+
 	/**
-	 * @param $path
-	 * @param array $params
-	 * @param string $method
+	 * @param Request $request
+	 * @param EndpointAbstract|null $endpoint
 	 *
 	 * @return array|null
 	 */
-	public static function execute($path, array $params = [], $method = "GET")
+	public static function execute(Request $request, EndpointAbstract $endpoint = null)
 	{
-		$path = trim($path, '/');
-		$uri = implode('/', [Config::HOST, Config::BASE_PATH, $path]);
-
-		$http = new \GuzzleHttp\Client();
-
-		// only support GET & POST
-		$method = strtoupper($method);
-		$is_post = ($method == 'POST');
-		if (!$is_post)
+		
+		if( $endpoint && method_exists($endpoint, "beforeExecude") )
 		{
-			$method = 'GET';
+			if( $endpoint->beforeExecude($request) !== true )
+			{
+				throw new EndpointException($endpoint->getError());
+			}
 		}
-
-		$query = http_build_query($params);
-
+		
+		$http = new \GuzzleHttp\Client();
 		try
 		{
-			$response = $http->request($method, $uri, [
-				'query' => $query
+			$response = $http->request($request->getMethod(), $request->getUri(), [
+				'query' => $request->buildParams()
 			]);
 		}
 		catch (ClientException $e)
@@ -73,53 +70,4 @@ class Connector
 
 		return $obj;
 	}
-
-	/**
-	 * @return int
-	 */
-	public static function timestamp()
-	{
-		$result = self::execute("timestamp");
-
-		return (int)$result;
-	}
-
-
-	/**
-	 * @param string $market
-	 *
-	 * @return array|null
-	 */
-	public static function tickers($market = Config::MARKET_BTCUAH)
-	{
-		$result = self::execute("tickers/{$market}");
-		return $result;
-	}
-
-	/**
-	 * @param string $market
-	 *
-	 * @return array|null
-	 */
-	public static function order_book($market = Config::MARKET_BTCUAH)
-	{
-		$result = self::execute("order_book", ['market' => $market]);
-		return $result;
-	}
-
-	/**
-	 * @param string $market
-	 *
-	 * @return array|null
-	 */
-	public static function trades($market = Config::MARKET_BTCUAH)
-	{
-		$result = self::execute("trades", ['market' => $market]);
-		return $result;
-	}
-
-
-
-
-
 }
