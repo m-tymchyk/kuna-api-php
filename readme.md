@@ -3,7 +3,12 @@
 
 # Kuna Exchange PHP API
 
-### WARNING! Is not released version!
+[![GitHub issues](https://img.shields.io/github/issues/reilag/kuna-api-php.svg?style=flat-square)](https://github.com/reilag/kuna-api-php/issues)
+[![GitHub stars](https://img.shields.io/github/stars/reilag/kuna-api-php.svg?style=flat-square)](https://github.com/reilag/kuna-api-php/stargazers)
+
+### WARNING! Is not stable version!
+
+PHP 5.6+ is required.
 
 ## 1. Install
 
@@ -41,18 +46,22 @@ You can find out more on how to install Composer, configure autoloading, and oth
 ### 2.1. Timestamp
 
 ```php
-use Kuna\Connector;
+use Kuna\Client;
 
-$timestamp = Connector::timestamp(); //1466486485
+$kuna = new Client();
+$timestamp = $kuna->public()->timestamp(); //1466486485
 
 ```
 
 ### 2.2. Tickers
 
 ```php
-use Kuna\Connector;
+use Kuna\Client;
+use Kuna\Constant;
 
-$tickers = Connector::tickers(Constant::MARKET_BTCUAH);
+$kuna = new Client();
+$tickers = $kuna->public()->tickers(Constant::MARKET_BTCUAH);
+
 print_r($tickers);
 ```
 
@@ -74,9 +83,12 @@ Result:
 ### 2.3. Order book
 
 ```php
-use Kuna\Connector;
+use Kuna\Client;
+use Kuna\Constant;
 
-$order_book = Connector::order_book(Constant::MARKET_BTCUAH);
+$kuna = new Client();
+$order_book = $kuna->public()->order_book(Constant::MARKET_BTCUAH);
+
 print_r($order_book);
 ```
 
@@ -97,8 +109,7 @@ Result:
 			"remaining_volume":"0.0326",
 			"executed_volume":"0.0",
 			"trades_count":0
-		},
-		...
+		}
 	],
 
 	"bids": [
@@ -115,8 +126,7 @@ Result:
 			"remaining_volume":"0.0005",
 			"executed_volume":"0.0",
 			"trades_count":0
-		},
-		...
+		}
 	]
 }
 ```
@@ -124,9 +134,12 @@ Result:
 ### 2.4. Trades
 
 ```php
-use Kuna\Connector;
+use Kuna\Client;
+use Kuna\Constant;
 
-$trades = Connector::trades(Constant::MARKET_BTCUAH);
+$kuna = new Client();
+$trades = $kuna->public()->trades(Constant::MARKET_BTCUAH);
+
 print_r($trades);
 ```
 
@@ -141,7 +154,6 @@ Result:
 		"market":"btcuah",
 		"created_at":"2016-06-21T04:44:58Z",
 		"side":null
-	},
-	...
+	}
 ]
 ```
