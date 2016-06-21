@@ -6,6 +6,16 @@
 [![GitHub issues](https://img.shields.io/github/issues/reilag/kuna-api-php.svg?style=flat-square)](https://github.com/reilag/kuna-api-php/issues)
 [![GitHub stars](https://img.shields.io/github/stars/reilag/kuna-api-php.svg?style=flat-square)](https://github.com/reilag/kuna-api-php/stargazers)
 
+
+[![PHP Version](https://img.shields.io/badge/php-5.6%2B-blue.svg?style=flat-square)](http://www.php.net/)
+[![Guzzle Version](https://img.shields.io/badge/guzzle-6.2-green.svg?style=flat-square)](http://docs.guzzlephp.org/)
+[![Packagist](https://https://img.shields.io/badge/packagist-reilag%2Fkuna--api--php-orange.svg?style=flat-square)](https://packagist.org/packages/reilag/kuna-api-php)
+
+
+
+
+
+
 ### WARNING! Is not stable version!
 
 PHP 5.6+ is required.
