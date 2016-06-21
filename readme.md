@@ -9,7 +9,7 @@
 
 [![PHP Version](https://img.shields.io/badge/php-5.6%2B-blue.svg?style=flat-square)](http://www.php.net/)
 [![Guzzle Version](https://img.shields.io/badge/guzzle-6.2.0-green.svg?style=flat-square)](http://docs.guzzlephp.org/)
-[![Packagist](ttps://img.shields.io/badge/packagist-reilag%2Fkuna--api--php-orange.svg?style=flat-square)](https://packagist.org/packages/reilag/kuna-api-php)
+[![Packagist](https://img.shields.io/badge/packagist-reilag%2Fkuna--api--php-orange.svg?style=flat-square)](https://packagist.org/packages/reilag/kuna-api-php)
 
 
 
