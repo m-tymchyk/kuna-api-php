@@ -20,6 +20,8 @@
 
 PHP 5.6+ is required.
 
+IF you want not use Composer or Must use PHP 5.3, you can use [Simple API PHP Library](/simple)
+
 ## 1. Install
 
 You can add Kuna PHP API as a dependency using the **composer.phar** CLI:
