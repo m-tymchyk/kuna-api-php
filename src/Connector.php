@@ -1,11 +1,11 @@
 <?php namespace Kuna;
 
 
-use Endpoint\EndpointAbstract;
 use GuzzleHttp\Exception\ClientException;
 use Kuna\Exception\EmptyResultException;
-use Kuna\Exception\EndpointException;
+use Kuna\Exception\ModelException;
 use Kuna\Exception\KunaException;
+use Kuna\Model\ModelAbstract;
 
 /**
  * Class Connector
@@ -22,21 +22,21 @@ class Connector
 
 	/**
 	 * @param Request $request
-	 * @param EndpointAbstract|null $endpoint
+	 * @param ModelAbstract|null $model
 	 *
 	 * @return array|null
 	 */
-	public static function execute(Request $request, EndpointAbstract $endpoint = null)
+	public static function execute(Request $request, ModelAbstract $model = null)
 	{
-		
-		if( $endpoint && method_exists($endpoint, "beforeExecude") )
+
+		if ($model && method_exists($model, "beforeExecude"))
 		{
-			if( $endpoint->beforeExecude($request) !== true )
+			if ($model->beforeExecude($request) !== true)
 			{
-				throw new EndpointException($endpoint->getError());
+				throw new ModelException($model->getError());
 			}
 		}
-		
+
 		$http = new \GuzzleHttp\Client();
 		try
 		{

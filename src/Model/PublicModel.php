@@ -1,16 +1,15 @@
-<?php namespace Kuna\Endpoint;
+<?php namespace Kuna\Model;
 
 
-use Endpoint\EndpointAbstract;
 use Kuna\Connector;
 use Kuna\Constant;
 use Kuna\Request;
 
 /**
- * Class PublicMethod
+ * Class PublicModel
  * @package Kuna\Endpoint
  */
-class PublicMethod extends EndpointAbstract
+class PublicModel extends ModelAbstract
 {
 
 	/**
@@ -28,11 +27,10 @@ class PublicMethod extends EndpointAbstract
 	 *
 	 * @return bool
 	 */
-	public function beforeExecude(Request $request) 
+	public function beforeExecude(Request $request)
 	{
 		return true;
 	}
-
 
 
 	/**

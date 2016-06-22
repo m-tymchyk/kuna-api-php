@@ -1,13 +1,14 @@
-<?php namespace Endpoint;
+<?php namespace Kuna\Model;
+
 
 use Kuna\Client;
 use Kuna\Request;
 
 /**
- * Class EndpointAbstract
+ * Class ModelAbstract
  * @package Endpoint
  */
-abstract class EndpointAbstract
+abstract class ModelAbstract
 {
 	/**
 	 * @var Client
@@ -25,15 +26,18 @@ abstract class EndpointAbstract
 	 * @return boolean
 	 */
 	public abstract function beforeExecude(Request $request);
-	
+
 	/**
-	 * EndpointAbstract constructor.
+	 * ModelAbstract constructor.
 	 *
 	 * @param Client $client
 	 */
 	public function __construct(Client $client = null)
 	{
-		if($client) $this->setClient($client);
+		if ($client)
+		{
+			$this->setClient($client);
+		}
 	}
 
 	/**
@@ -44,6 +48,7 @@ abstract class EndpointAbstract
 	public function setClient(Client $client)
 	{
 		$this->client = $client;
+
 		return $this;
 	}
 
