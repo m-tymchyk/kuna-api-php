@@ -34,7 +34,7 @@ class Request
 	 * @param array $params
 	 * @param string $method
 	 */
-	public function __construct($path, $params = [], $method = "GET")
+	public function __construct($path, $params = [], $method = 'GET')
 	{
 		$this->path = trim($path, "/");
 		$this->params = $params;
@@ -43,7 +43,7 @@ class Request
 		// only support GET & POST
 		$method = strtoupper($method);
 		$is_post = ($method == 'POST');
-		$this->method = $is_post ? "POST" : "GET";
+		$this->method = $is_post ? 'POST' : 'GET';
 
 		$this->tonce = $this->getTonce();
 	}
