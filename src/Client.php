@@ -12,17 +12,6 @@
  */
 class Client extends Connector
 {
-
-	/**
-	 * @var string
-	 */
-	protected $publicKey;
-
-	/**
-	 * @var string
-	 */
-	protected $secretKey;
-
 	/**
 	 * @var \Kuna\Model\PrivateModel
 	 */
@@ -41,8 +30,7 @@ class Client extends Connector
 	 */
 	public function __construct(array $options = null)
 	{
-		$this->publicKey = isset($options['publicKey']) ? $options['publicKey'] : null;
-		$this->secretKey = isset($options['secretKey']) ? $options['secretKey'] : null;
+		parent::__construct();
 	}
 
 	/**
@@ -69,46 +57,6 @@ class Client extends Connector
 		}
 
 		return $this->publicModel;
-	}
-
-	/**
-	 * @param string $key
-	 *
-	 * @return $this
-	 */
-	public function setSecretKey($key)
-	{
-		$this->secretKey = $key;
-
-		return $this;
-	}
-
-	/**
-	 * @param string $key
-	 *
-	 * @return $this
-	 */
-	public function setPublicKey($key)
-	{
-		$this->publicKey = $key;
-
-		return $this;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getSecretKey()
-	{
-		return $this->secretKey;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getPublicKey()
-	{
-		return $this->publicKey;
 	}
 
 }

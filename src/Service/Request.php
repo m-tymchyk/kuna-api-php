@@ -1,9 +1,11 @@
-<?php namespace Kuna;
+<?php namespace Kuna\Service;
+
+use Kuna\Constant;
 
 
 /**
  * Class Request
- * @package Kuna
+ * @package Kuna\Service
  */
 class Request
 {
@@ -15,7 +17,12 @@ class Request
 	/**
 	 * @var array
 	 */
-	protected $options;
+	protected $options = [];
+
+	/**
+	 * @var array
+	 */
+	protected $params = [];
 
 	/**
 	 * @var string
@@ -28,11 +35,16 @@ class Request
 	protected $tonce;
 
 	/**
+	 * @var
+	 */
+	protected $error;
+
+	/**
 	 * Request constructor.
 	 *
-	 * @param string $path
-	 * @param array $params
-	 * @param string $method
+	 * @param string    $path
+	 * @param array     $params
+	 * @param string    $method
 	 */
 	public function __construct($path, $params = [], $method = 'GET')
 	{
@@ -47,7 +59,6 @@ class Request
 
 		$this->tonce = $this->getTonce();
 	}
-
 
 	/**
 	 * @return integer
@@ -98,12 +109,28 @@ class Request
 
 	/**
 	 * @param $key
-	 * @param $value
+	 * @param null $value
+	 *
+	 * @return $this
 	 */
 	public function setParam($key, $value = null)
 	{
 		$add = [$key => $value];
-		$this->params = array_merge_recursive($this->options, $add);
+		$this->params = array_merge_recursive($this->params, $add);
+
+		return $this;
+	}
+
+	/**
+	 * @param $key
+	 * @param null $value
+	 *
+	 * @return $this
+	 */
+	public function setOption($key, $value = null)
+	{
+		$add = [$key => $value];
+		$this->options = array_merge_recursive($this->options, $add);
 
 		return $this;
 	}
@@ -131,6 +158,24 @@ class Request
 
 		$this->setParam('signature', $signature);
 
+		return true;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getError()
+	{
+		return $this->error;
+	}
+
+	/**
+	 * @param array $option
+	 *
+	 * @return bool
+	 */
+	public function prepareRequest(array $options = [])
+	{
 		return true;
 	}
 

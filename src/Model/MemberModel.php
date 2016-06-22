@@ -3,7 +3,7 @@
 
 use Kuna\Connector;
 use Kuna\Constant;
-use Kuna\Request;
+use Kuna\Service\PrivateRequest;
 
 
 /**
@@ -18,8 +18,8 @@ class MemberModel extends PrivateModel
 	 */
 	public function me()
 	{
-		$request = new Request("members/me");
-		$result = Connector::execute($request, $this);
+		$request = new PrivateRequest("members/me");
+		$result = $this->client->execute($request);
 		return $result;
 	}
 
@@ -28,10 +28,10 @@ class MemberModel extends PrivateModel
 	 */
 	public function trades($market = Constant::MARKET_BTCUAH)
 	{
-		$request = new Request("trades/my", [
+		$request = new PrivateRequest("trades/my", [
 			'market' => $market
 		]);
-		$result = Connector::execute($request, $this);
+		$result = $this->client->execute($request);
 		return $result;
 	}
 

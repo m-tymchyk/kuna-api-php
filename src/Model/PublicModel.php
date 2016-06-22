@@ -1,9 +1,7 @@
 <?php namespace Kuna\Model;
 
-
-use Kuna\Connector;
 use Kuna\Constant;
-use Kuna\Request;
+use Kuna\Service\Request;
 
 /**
  * Class PublicModel
@@ -39,7 +37,7 @@ class PublicModel extends ModelAbstract
 	public function timestamp()
 	{
 		$request = new Request("timestamp");
-		$result = Connector::execute($request, $this);
+		$result = $this->client->execute($request);
 
 		return (int)$result;
 	}
@@ -53,7 +51,7 @@ class PublicModel extends ModelAbstract
 	public function tickers($market = Constant::MARKET_BTCUAH)
 	{
 		$request = new Request("tickers/{$market}");
-		$result = Connector::execute($request, $this);
+		$result = $this->client->execute($request);
 
 		return $result;
 	}
@@ -66,7 +64,7 @@ class PublicModel extends ModelAbstract
 	public function order_book($market = Constant::MARKET_BTCUAH)
 	{
 		$request = new Request("order_book", ['market' => $market]);
-		$result = Connector::execute($request, $this);
+		$result = $this->client->execute($request);
 
 		return $result;
 	}
@@ -79,7 +77,7 @@ class PublicModel extends ModelAbstract
 	public function trades($market = Constant::MARKET_BTCUAH)
 	{
 		$request = new Request("trades", ['market' => $market]);
-		$result = Connector::execute($request, $this);
+		$result = $this->client->execute($request);
 
 		return $result;
 	}

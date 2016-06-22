@@ -21,13 +21,6 @@ abstract class ModelAbstract
 	protected $error;
 
 	/**
-	 * @param Request $request
-	 *
-	 * @return boolean
-	 */
-	public abstract function beforeExecude(Request $request);
-
-	/**
 	 * ModelAbstract constructor.
 	 *
 	 * @param Client $client
