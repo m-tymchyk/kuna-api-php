@@ -20,7 +20,7 @@
 
 PHP 5.6+ is required.
 
-IF you want not use Composer or Must use PHP 5.3, you can use [Simple API PHP Library](/simple)
+If you want not use Composer or use less of PHP 5.6 version, you can use [Simple API PHP Library](/simple)
 
 ## 1. Install
 
