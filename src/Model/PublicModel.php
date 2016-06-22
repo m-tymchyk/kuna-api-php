@@ -1,16 +1,13 @@
-<?php namespace Kuna\Endpoint;
+<?php namespace Kuna\Model;
 
-
-use Endpoint\EndpointAbstract;
-use Kuna\Connector;
 use Kuna\Constant;
-use Kuna\Request;
+use Kuna\Service\Request;
 
 /**
- * Class PublicMethod
+ * Class PublicModel
  * @package Kuna\Endpoint
  */
-class PublicMethod extends EndpointAbstract
+class PublicModel extends ModelAbstract
 {
 
 	/**
@@ -28,11 +25,10 @@ class PublicMethod extends EndpointAbstract
 	 *
 	 * @return bool
 	 */
-	public function beforeExecude(Request $request) 
+	public function beforeExecude(Request $request)
 	{
 		return true;
 	}
-
 
 
 	/**
@@ -41,7 +37,7 @@ class PublicMethod extends EndpointAbstract
 	public function timestamp()
 	{
 		$request = new Request("timestamp");
-		$result = Connector::execute($request, $this);
+		$result = $this->client->execute($request);
 
 		return (int)$result;
 	}
@@ -55,7 +51,7 @@ class PublicMethod extends EndpointAbstract
 	public function tickers($market = Constant::MARKET_BTCUAH)
 	{
 		$request = new Request("tickers/{$market}");
-		$result = Connector::execute($request, $this);
+		$result = $this->client->execute($request);
 
 		return $result;
 	}
@@ -68,7 +64,7 @@ class PublicMethod extends EndpointAbstract
 	public function order_book($market = Constant::MARKET_BTCUAH)
 	{
 		$request = new Request("order_book", ['market' => $market]);
-		$result = Connector::execute($request, $this);
+		$result = $this->client->execute($request);
 
 		return $result;
 	}
@@ -81,7 +77,7 @@ class PublicMethod extends EndpointAbstract
 	public function trades($market = Constant::MARKET_BTCUAH)
 	{
 		$request = new Request("trades", ['market' => $market]);
-		$result = Connector::execute($request, $this);
+		$result = $this->client->execute($request);
 
 		return $result;
 	}

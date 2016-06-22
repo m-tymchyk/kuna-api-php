@@ -4,34 +4,23 @@
 /**
  * Class Client
  * @package Kuna
- * 
- * 
+ *
+ *
  * Created by PhpStorm.
  * User: Tymchyk Maksym
- * 
+ *
  */
 class Client extends Connector
 {
+	/**
+	 * @var \Kuna\Model\PrivateModel
+	 */
+	protected $privateModel;
 
 	/**
-	 * @var string
+	 * @var \Kuna\Model\PublicModel
 	 */
-	protected $publicKey;
-
-	/**
-	 * @var string
-	 */
-	protected $secretKey;
-
-	/**
-	 * @var Endpoint\PrivateMethod
-	 */
-	protected $privateEndpoint;
-
-	/**
-	 * @var Endpoint\PublicMethod
-	 */
-	protected $publicEndpoint;
+	protected $publicModel;
 
 	/**
 	 * Client constructor.
@@ -41,70 +30,33 @@ class Client extends Connector
 	 */
 	public function __construct(array $options = null)
 	{
-		$this->publicKey = isset($options['publicKey']) ? $options['publicKey'] : null;
-		$this->secretKey = isset($options['secretKey']) ? $options['secretKey'] : null;
+		parent::__construct();
 	}
 
 	/**
-	 * @return Endpoint\PrivateMethod
+	 * @return \Kuna\Model\PrivateModel
 	 */
-	public function private()
+	public function private ()
 	{
-		if( empty($this->privateEndpoint) )
+		if (empty($this->privateModel))
 		{
-			$this->privateEndpoint = new Endpoint\PrivateMethod($this);
+			$this->privateModel = new \Kuna\Model\PrivateModel($this);
 		}
-		return $this->privateEndpoint;
+
+		return $this->privateModel;
 	}
 
 	/**
-	 * @return Endpoint\PublicMethod
+	 * @return \Kuna\Model\PublicModel
 	 */
-	public function public()
+	public function public ()
 	{
-		if( empty($this->publicEndpoint) )
+		if (empty($this->publicModel))
 		{
-			$this->publicEndpoint = new Endpoint\PublicMethod($this);
+			$this->publicModel = new \Kuna\Model\PublicModel($this);
 		}
-		return $this->publicEndpoint;
+
+		return $this->publicModel;
 	}
 
-	/**
-	 * @param string $key
-	 *
-	 * @return $this
-	 */
-	public function setSecretKey($key)
-	{
-		$this->secretKey = $key;
-		return $this;
-	}
-
-	/**
-	 * @param string $key
-	 *
-	 * @return $this
-	 */
-	public function setPublicKey($key)
-	{
-		$this->publicKey = $key;
-		return $this;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getSecretKey()
-	{
-		return $this->secretKey;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getPublicKey()
-	{
-		return $this->publicKey;
-	}
-	
 }
