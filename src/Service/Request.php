@@ -1,5 +1,6 @@
 <?php namespace Kuna\Service;
 
+
 use Kuna\Constant;
 
 
@@ -42,9 +43,9 @@ class Request
 	/**
 	 * Request constructor.
 	 *
-	 * @param string    $path
-	 * @param array     $params
-	 * @param string    $method
+	 * @param string $path
+	 * @param array $params
+	 * @param string $method
 	 */
 	public function __construct($path, $params = [], $method = 'GET')
 	{
@@ -83,7 +84,7 @@ class Request
 	 */
 	public function buildParams($sort = false)
 	{
-		if ($sort)
+		if($sort)
 		{
 			ksort($this->params);
 		}
@@ -150,11 +151,11 @@ class Request
 		$prm =
 			[
 				$this->getMethod(),
-				Constant::BASE_PATH . "/" . $this->getPath(),
+				"/" . Constant::BASE_PATH . "/" . $this->getPath(),
 				$this->buildParams(true)
 			];
 
-		$signature = bin2hex(hash_hmac('SHA256', implode("|", $prm), $secretKey));
+		$signature = hash_hmac('SHA256', implode("|", $prm), $secretKey);
 
 		$this->setParam('signature', $signature);
 
@@ -170,7 +171,7 @@ class Request
 	}
 
 	/**
-	 * @param array $option
+	 * @param array $options
 	 *
 	 * @return bool
 	 */

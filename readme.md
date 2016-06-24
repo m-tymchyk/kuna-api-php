@@ -39,7 +39,7 @@ Alternatively, you can specify Kuna PHP API as a dependency in your project's ex
 ```json
 {
    "require": {
-      "reilag/kuna-api-php": "v0.3.5-rc.1"
+      "reilag/kuna-api-php": "v0.3.6-rc.2"
    }
 }
 ```
@@ -61,7 +61,7 @@ You can find out more on how to install Composer, configure autoloading, and oth
 use Kuna\Client;
 
 $kuna = new Client();
-$timestamp = $kuna->public()->timestamp(); //1466486485
+$timestamp = $kuna->publicMethod()->timestamp(); //1466486485
 
 ```
 
@@ -72,7 +72,7 @@ use Kuna\Client;
 use Kuna\Constant;
 
 $kuna = new Client();
-$tickers = $kuna->public()->tickers(Constant::MARKET_BTCUAH);
+$tickers = $kuna->publicMethod()->tickers(Constant::MARKET_BTCUAH);
 
 print_r($tickers);
 ```
@@ -99,7 +99,7 @@ use Kuna\Client;
 use Kuna\Constant;
 
 $kuna = new Client();
-$order_book = $kuna->public()->order_book(Constant::MARKET_BTCUAH);
+$order_book = $kuna->publicMethod()->order_book(Constant::MARKET_BTCUAH);
 
 print_r($order_book);
 ```
@@ -150,7 +150,7 @@ use Kuna\Client;
 use Kuna\Constant;
 
 $kuna = new Client();
-$trades = $kuna->public()->trades(Constant::MARKET_BTCUAH);
+$trades = $kuna->publicMethod()->trades(Constant::MARKET_BTCUAH);
 
 print_r($trades);
 ```

@@ -13,32 +13,31 @@
 class Client extends Connector
 {
 	/**
-	 * @var \Kuna\Model\PrivateModel
+	 * @var \Kuna\Model\PrivateModel $privateModel
 	 */
 	protected $privateModel;
 
 	/**
-	 * @var \Kuna\Model\PublicModel
+	 * @var \Kuna\Model\PublicModel $publicModel
 	 */
 	protected $publicModel;
 
 	/**
 	 * Client constructor.
 	 *
-	 * @param $apiKey
-	 * @param $apiSecret
+	 * @param array|null $options
 	 */
 	public function __construct(array $options = null)
 	{
-		parent::__construct();
+		parent::__construct($options);
 	}
 
 	/**
 	 * @return \Kuna\Model\PrivateModel
 	 */
-	public function private ()
+	public function privateMethod ()
 	{
-		if (empty($this->privateModel))
+		if(empty($this->privateModel))
 		{
 			$this->privateModel = new \Kuna\Model\PrivateModel($this);
 		}
@@ -49,9 +48,9 @@ class Client extends Connector
 	/**
 	 * @return \Kuna\Model\PublicModel
 	 */
-	public function public ()
+	public function publicMethod ()
 	{
-		if (empty($this->publicModel))
+		if(empty($this->publicModel))
 		{
 			$this->publicModel = new \Kuna\Model\PublicModel($this);
 		}

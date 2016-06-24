@@ -24,7 +24,7 @@ class PrivateModel extends ModelAbstract
 	public function member()
 	{
 		static $member;
-		if (empty($member))
+		if(empty($member))
 		{
 			$member = new MemberModel($this->client);
 		}

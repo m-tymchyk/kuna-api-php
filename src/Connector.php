@@ -1,5 +1,6 @@
 <?php namespace Kuna;
 
+
 use Kuna\Exception\EmptyResultException;
 use Kuna\Exception\ModelException;
 use Kuna\Model\ModelAbstract;
@@ -59,7 +60,7 @@ class Connector
 				->setOption('secretKey', $this->getSecretKey());
 		}
 
-		if ($request->prepareRequest() !== true)
+		if($request->prepareRequest() !== true)
 		{
 			throw new ModelException($request->getError());
 		}
@@ -69,7 +70,7 @@ class Connector
 				'query' => $request->buildParams()
 			]);
 
-		if ($response->getStatusCode() !== 200)
+		if($response->getStatusCode() !== 200)
 		{
 			return null;
 		}
@@ -88,15 +89,16 @@ class Connector
 	 */
 	protected static function jsonDecode($json, $assoc = false)
 	{
-		if ( empty($json) )
+		if(empty($json))
 		{
 			throw new EmptyResultException("Can't json_decode empty string [{$json}]");
 		}
 		$data = json_decode($json, $assoc);
-		if ($data === null)
+		if($data === null)
 		{
 			throw new EmptyResultException("Failed to json_decode [{$json}]");
 		}
+
 		return $data;
 	}
 
@@ -108,6 +110,7 @@ class Connector
 	public function setSecretKey($key)
 	{
 		$this->secretKey = $key;
+
 		return $this;
 	}
 
@@ -119,6 +122,7 @@ class Connector
 	public function setPublicKey($key)
 	{
 		$this->publicKey = $key;
+
 		return $this;
 	}
 
