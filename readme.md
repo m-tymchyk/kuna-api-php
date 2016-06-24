@@ -31,7 +31,7 @@ You can add Kuna PHP API as a dependency using the **composer.phar** CLI:
 curl -sS https://getcomposer.org/installer | php
 
 # Add dependency
-php composer.phar require reilag/kuna-api-php:v0.3.5-rc.1
+php composer.phar require reilag/kuna-api-php:v0.3.6-rc.2
 ```
 
 Alternatively, you can specify Kuna PHP API as a dependency in your project's existing `composer.json` file:
