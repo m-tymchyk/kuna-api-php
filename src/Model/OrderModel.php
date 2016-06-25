@@ -14,23 +14,30 @@ class OrderModel extends PrivateModel
 {
 
 	/**
-	 * @param Order $order
+	 * @param $price
+	 * @param $volume
+	 * @param $side
+	 * @param $market
 	 *
 	 * @return bool|Order
 	 */
-	public function create(Order $order)
+	public function create($price, $volume, $side, $market)
 	{
-		$params =
+		
+		
+		$request = new PrivateRequest(
+			'orders',
 			[
-				'side' => $order->side,
-				'volume' => $order->volume,
-				'market' => $order->market,
-				'price' => $order->price
-			];
-		$request = new PrivateRequest('orders', $params, 'POST');
+				'side' => $side,
+				'volume' => $volume,
+				'market' => $market,
+				'price' => $price
+			],
+			'POST'
+		);
 		$result = $this->client->execute($request);
 
-		if (array_key_exists('id', $result))
+		if(array_key_exists('id', $result))
 		{
 			return new Order($result);
 		}
@@ -39,69 +46,29 @@ class OrderModel extends PrivateModel
 	}
 
 	/**
-	 * @param Order $order
+	 * @param $order_id
 	 *
-	 * @return bool|Order
+	 * @return array|null
 	 */
-	public function delete(Order $order)
+	public function delete($order_id)
 	{
-		$request = new PrivateRequest('order/delete', ['id' => $order->id], 'POST');
+		$request = new PrivateRequest('order/delete', ['id' => $order_id], 'POST');
 		$result = $this->client->execute($request);
 
-		if (array_key_exists('id', $result))
-		{
-			return new Order($result);
-		}
-
-		return false;
+		return $result;
 	}
 
 	/**
 	 * @param string $market
 	 *
-	 * @return Order[]|bool
+	 * @return array|null
 	 */
 	public function list($market = Constant::MARKET_BTCUAH)
 	{
 		$request = new PrivateRequest('orders', ['market' => $market], 'GET');
 		$result = $this->client->execute($request);
 
-		if ($result)
-		{
-			$list = [];
-			foreach ($result as $ord)
-			{
-				$list[] = new Order($ord);
-			}
-
-			return $list;
-		}
-
-		return false;
-	}
-
-	/**
-	 * @param string $market
-	 *
-	 * @return Trade[]|bool
-	 */
-	public function trades($market = Constant::MARKET_BTCUAH)
-	{
-
-		$request = new PrivateRequest('trades/my', ['market' => $market], 'GET');
-		$result = $this->client->execute($request);
-		if ($result)
-		{
-			$list = [];
-			foreach ($result as $ord)
-			{
-				$list[] = new Trade($ord);
-			}
-
-			return $list;
-		}
-
-		return false;
+		return $result;
 	}
 
 }

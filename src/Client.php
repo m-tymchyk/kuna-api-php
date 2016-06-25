@@ -35,7 +35,7 @@ class Client extends Connector
 	/**
 	 * @return \Kuna\Model\PrivateModel
 	 */
-	public function privateMethod ()
+	public function privateMethod()
 	{
 		if(empty($this->privateModel))
 		{
@@ -48,7 +48,7 @@ class Client extends Connector
 	/**
 	 * @return \Kuna\Model\PublicModel
 	 */
-	public function publicMethod ()
+	public function publicMethod()
 	{
 		if(empty($this->publicModel))
 		{

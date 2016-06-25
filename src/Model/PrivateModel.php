@@ -1,6 +1,11 @@
 <?php namespace Kuna\Model;
 
 
+use Kuna\Constant;
+use Kuna\Marketdata\Trade;
+use Kuna\Service\PrivateRequest;
+
+
 /**
  * Class PrivateModel
  * @package Kuna\Endpoint
@@ -19,17 +24,40 @@ class PrivateModel extends ModelAbstract
 	}
 
 	/**
-	 * @return MemberModel
+	 * @return array|null
 	 */
-	public function member()
+	public function me()
 	{
-		static $member;
-		if(empty($member))
+		$request = new PrivateRequest("members/me");
+		$result = $this->client->execute($request);
+
+		return $result;
+	}
+
+	/**
+	 * @return array|null
+	 */
+	public function trades($market = Constant::MARKET_BTCUAH)
+	{
+		$request = new PrivateRequest('trades/my', ['market' => $market], 'GET');
+		$result = $this->client->execute($request);
+
+		return $result;
+	}
+
+	/**
+	 * @return OrderModel
+	 */
+	public function order()
+	{
+		static $order;
+		if(empty($order))
 		{
-			$member = new MemberModel($this->client);
+			$order = new OrderModel($this->client);
 		}
 
-		return $member;
+		return $order;
 	}
+
 
 }
