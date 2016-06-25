@@ -16,11 +16,11 @@
 
 
 
-### WARNING! Is not stable version!
+### WARNING! This is not a stable version!
 
 PHP 5.6+ is required.
 
-If you want not use Composer or use less of PHP 5.6 version, you can use [Simple API PHP Library](/simple)
+If you do not want to use Composer or use version less than PHP 5.6 , you can use [Simple API PHP Library](/simple)
 
 ## 1. Install
 

@@ -7,5 +7,11 @@
  */
 class KunaException extends \RuntimeException
 {
-
+	/**
+	 * @return string
+	 */
+	public function __toString()
+	{
+		return $this->getMessage();
+	}
 }
