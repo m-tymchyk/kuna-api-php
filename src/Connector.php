@@ -35,16 +35,16 @@ class Connector
      */
     public function __construct(array $options = null)
     {
-        $this->publicKey = isset($options['publicKey']) ? $options['publicKey'] ?? null;
-        $this->secretKey = isset($options['secretKey']) ? $options['secretKey'] ?? null;
+        $this->publicKey = isset($options['publicKey']) ? $options['publicKey'] : null;
+        $this->secretKey = isset($options['secretKey']) ? $options['secretKey'] : null;
 
-        $this->httpClient = new \GuzzleHttp\Client;
+        $this->httpClient = new \GuzzleHttp\Client();
     }
 
     /**
      * @param Request $request
      *
-     * @return array|null
+     * @return array
      */
     public function execute(Request $request)
     {
