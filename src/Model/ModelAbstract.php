@@ -1,8 +1,8 @@
-<?php namespace Kuna\Model;
+<?php
 
+namespace Kuna\Model;
 
 use Kuna\Client;
-use Kuna\Request;
 
 /**
  * Class ModelAbstract
@@ -10,46 +10,45 @@ use Kuna\Request;
  */
 abstract class ModelAbstract
 {
-	/**
-	 * @var Client
-	 */
-	protected $client;
+    /**
+     * @var Client
+     */
+    protected $client;
 
-	/**
-	 * @var string
-	 */
-	protected $error;
+    /**
+     * @var string
+     */
+    protected $error;
 
-	/**
-	 * ModelAbstract constructor.
-	 *
-	 * @param Client $client
-	 */
-	public function __construct(Client $client = null)
-	{
-		if ($client)
-		{
-			$this->setClient($client);
-		}
-	}
+    /**
+     * ModelAbstract constructor.
+     *
+     * @param Client $client
+     */
+    public function __construct(Client $client = null)
+    {
+        if ($client) {
+            $this->setClient($client);
+        }
+    }
 
-	/**
-	 * @param Client $client
-	 *
-	 * @return $this
-	 */
-	public function setClient(Client $client)
-	{
-		$this->client = $client;
+    /**
+     * @param Client $client
+     *
+     * @return $this
+     */
+    public function setClient(Client $client)
+    {
+        $this->client = $client;
 
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * @return string
-	 */
-	public function getError()
-	{
-		return $this->error;
-	}
+    /**
+     * @return string
+     */
+    public function getError()
+    {
+        return $this->error;
+    }
 }

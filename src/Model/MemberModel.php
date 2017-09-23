@@ -1,10 +1,10 @@
-<?php namespace Kuna\Model;
+<?php
 
+namespace Kuna\Model;
 
 use Kuna\Connector;
 use Kuna\Constant;
 use Kuna\Service\PrivateRequest;
-
 
 /**
  * Class MemberModel
@@ -12,7 +12,4 @@ use Kuna\Service\PrivateRequest;
  */
 class MemberModel extends PrivateModel
 {
-
-	
-
 }

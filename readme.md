@@ -99,9 +99,9 @@ use Kuna\Client;
 use Kuna\Constant;
 
 $kuna = new Client();
-$order_book = $kuna->publicMethod()->order_book(Constant::MARKET_BTCUAH);
+$orderBook = $kuna->publicMethod()->orderBook(Constant::MARKET_BTCUAH);
 
-print_r($order_book);
+print_r($orderBook);
 ```
 
 Result:
@@ -254,7 +254,7 @@ Result:
 $orderMethod = $privateMethod->order();
 
 /**
- * $order_id
+ * @property int $orderId
  */
 $deletedOrder = $orderMethod->delete(3091);
 

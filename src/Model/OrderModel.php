@@ -1,5 +1,6 @@
-<?php namespace Kuna\Model;
+<?php
 
+namespace Kuna\Model;
 
 use Kuna\Constant;
 use Kuna\Marketdata\Order;
@@ -12,63 +13,58 @@ use Kuna\Service\PrivateRequest;
  */
 class OrderModel extends PrivateModel
 {
+    /**
+     * @param $price
+     * @param $volume
+     * @param $side
+     * @param $market
+     *
+     * @return bool|Order
+     */
+    public function create($price, $volume, $side, $market)
+    {
+        $request = new PrivateRequest(
+            'orders',
+            [
+                'side'   => $side,
+                'volume' => $volume,
+                'market' => $market,
+                'price'  => $price
+            ],
+            'POST'
+        );
+        $result = $this->client->execute($request);
 
-	/**
-	 * @param $price
-	 * @param $volume
-	 * @param $side
-	 * @param $market
-	 *
-	 * @return bool|Order
-	 */
-	public function create($price, $volume, $side, $market)
-	{
-		
-		
-		$request = new PrivateRequest(
-			'orders',
-			[
-				'side' => $side,
-				'volume' => $volume,
-				'market' => $market,
-				'price' => $price
-			],
-			'POST'
-		);
-		$result = $this->client->execute($request);
+        if (array_key_exists('id', $result)) {
+            return new Order($result);
+        }
 
-		if(array_key_exists('id', $result))
-		{
-			return new Order($result);
-		}
+        return false;
+    }
 
-		return false;
-	}
+    /**
+     * @param $orderId
+     *
+     * @return array|null
+     */
+    public function delete($orderId)
+    {
+        $request = new PrivateRequest('order/delete', ['id' => $orderId], 'POST');
+        $result = $this->client->execute($request);
 
-	/**
-	 * @param $order_id
-	 *
-	 * @return array|null
-	 */
-	public function delete($order_id)
-	{
-		$request = new PrivateRequest('order/delete', ['id' => $order_id], 'POST');
-		$result = $this->client->execute($request);
+        return $result;
+    }
 
-		return $result;
-	}
+    /**
+     * @param string $market
+     *
+     * @return array|null
+     */
+    public function list($market = Constant::MARKET_BTCUAH)
+    {
+        $request = new PrivateRequest('orders', ['market' => $market], 'GET');
+        $result = $this->client->execute($request);
 
-	/**
-	 * @param string $market
-	 *
-	 * @return array|null
-	 */
-	public function list($market = Constant::MARKET_BTCUAH)
-	{
-		$request = new PrivateRequest('orders', ['market' => $market], 'GET');
-		$result = $this->client->execute($request);
-
-		return $result;
-	}
-
+        return $result;
+    }
 }

@@ -1,4 +1,6 @@
-<?php namespace Kuna\Model;
+<?php
+
+namespace Kuna\Model;
 
 use Kuna\Constant;
 use Kuna\Service\Request;
@@ -9,78 +11,74 @@ use Kuna\Service\Request;
  */
 class PublicModel extends ModelAbstract
 {
+    /**
+     * PublicMethod constructor.
+     *
+     * @param \Kuna\Client $client
+     */
+    public function __construct($client)
+    {
+        parent::__construct($client);
+    }
 
-	/**
-	 * PublicMethod constructor.
-	 *
-	 * @param \Kuna\Client $client
-	 */
-	public function __construct($client)
-	{
-		parent::__construct($client);
-	}
+    /**
+     * @param Request $request
+     *
+     * @return bool
+     */
+    public function beforeExecute(Request $request)
+    {
+        return true;
+    }
 
-	/**
-	 * @param Request $request
-	 *
-	 * @return bool
-	 */
-	public function beforeExecude(Request $request)
-	{
-		return true;
-	}
+    /**
+     * @return int
+     */
+    public function timestamp()
+    {
+        $request = new Request("timestamp");
+        $result = $this->client->execute($request);
 
-
-	/**
-	 * @return int
-	 */
-	public function timestamp()
-	{
-		$request = new Request("timestamp");
-		$result = $this->client->execute($request);
-
-		return (int)$result;
-	}
+        return (int)$result;
+    }
 
 
-	/**
-	 * @param string $market
-	 *
-	 * @return array|null
-	 */
-	public function tickers($market = Constant::MARKET_BTCUAH)
-	{
-		$request = new Request("tickers/{$market}");
-		$result = $this->client->execute($request);
+    /**
+     * @param string $market
+     *
+     * @return array|null
+     */
+    public function tickers($market = Constant::MARKET_BTCUAH)
+    {
+        $request = new Request("tickers/{$market}");
+        $result = $this->client->execute($request);
 
-		return $result;
-	}
+        return $result;
+    }
 
-	/**
-	 * @param string $market
-	 *
-	 * @return array|null
-	 */
-	public function order_book($market = Constant::MARKET_BTCUAH)
-	{
-		$request = new Request("order_book", ['market' => $market]);
-		$result = $this->client->execute($request);
+    /**
+     * @param string $market
+     *
+     * @return array|null
+     */
+    public function orderBook($market = Constant::MARKET_BTCUAH)
+    {
+        $request = new Request("order_book", ['market' => $market]);
+        $result = $this->client->execute($request);
 
-		return $result;
-	}
+        return $result;
+    }
 
-	/**
-	 * @param string $market
-	 *
-	 * @return array|null
-	 */
-	public function trades($market = Constant::MARKET_BTCUAH)
-	{
-		$request = new Request("trades", ['market' => $market]);
-		$result = $this->client->execute($request);
+    /**
+     * @param string $market
+     *
+     * @return array|null
+     */
+    public function trades($market = Constant::MARKET_BTCUAH)
+    {
+        $request = new Request("trades", ['market' => $market]);
+        $result = $this->client->execute($request);
 
-		return $result;
-	}
-
-
+        return $result;
+    }
 }

@@ -1,4 +1,6 @@
-<?php namespace Kuna\Service;
+<?php
+
+namespace Kuna\Service;
 
 
 /**
@@ -7,35 +9,32 @@
  */
 class PrivateRequest extends Request
 {
-	/**
-	 * @param array $option
-	 *
-	 * @return bool
-	 */
-	public function prepareRequest(array $options = [])
-	{
+    /**
+     * @param array $options
+     *
+     * @return bool
+     */
+    public function prepareRequest(array $options = [])
+    {
+        $options = array_merge_recursive($options, $this->options);
 
-		$options = array_merge_recursive($options, $this->options);
+        $publicKey = isset($options['publicKey']) ? $options['publicKey'] : null;
+        if (empty($publicKey)) {
+            $this->error = 'Public KEY is empty';
 
-		$publicKey = isset($options['publicKey']) ? $options['publicKey'] : null;
-		if(empty($publicKey))
-		{
-			$this->error = 'Public KEY is empty';
+            return false;
+        }
 
-			return false;
-		}
+        $secretKey = isset($options['secretKey']) ? $options['secretKey'] : null;
+        if (empty($secretKey)) {
+            $this->error = 'Secret KEY is empty';
 
-		$secretKey = isset($options['secretKey']) ? $options['secretKey'] : null;
-		if(empty($secretKey))
-		{
-			$this->error = 'Secret KEY is empty';
+            return false;
+        }
 
-			return false;
-		}
+        $this->subscribeSignature($publicKey, $secretKey);
 
-		$this->subscribeSignature($publicKey, $secretKey);
-
-		return parent::prepareRequest($options);
-	}
+        return parent::prepareRequest($options);
+    }
 
 }

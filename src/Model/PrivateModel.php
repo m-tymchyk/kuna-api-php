@@ -1,10 +1,9 @@
-<?php namespace Kuna\Model;
+<?php
 
+namespace Kuna\Model;
 
 use Kuna\Constant;
-use Kuna\Marketdata\Trade;
 use Kuna\Service\PrivateRequest;
-
 
 /**
  * Class PrivateModel
@@ -12,52 +11,35 @@ use Kuna\Service\PrivateRequest;
  */
 class PrivateModel extends ModelAbstract
 {
+    /**
+     * @return array
+     */
+    public function me():? array
+    {
+        $request = new PrivateRequest("members/me");
+        $result = $this->client->execute($request);
 
-	/**
-	 * PrivateMethod constructor.
-	 *
-	 * @param \Kuna\Client $client
-	 */
-	public function __construct($client)
-	{
-		parent::__construct($client);
-	}
+        return $result;
+    }
 
-	/**
-	 * @return array|null
-	 */
-	public function me()
-	{
-		$request = new PrivateRequest("members/me");
-		$result = $this->client->execute($request);
+    /**
+     * @param string $market
+     *
+     * @return array
+     */
+    public function trades($market = Constant::MARKET_BTCUAH):? array
+    {
+        $request = new PrivateRequest('trades/my', ['market' => $market], 'GET');
+        $result = $this->client->execute($request);
 
-		return $result;
-	}
+        return $result;
+    }
 
-	/**
-	 * @return array|null
-	 */
-	public function trades($market = Constant::MARKET_BTCUAH)
-	{
-		$request = new PrivateRequest('trades/my', ['market' => $market], 'GET');
-		$result = $this->client->execute($request);
-
-		return $result;
-	}
-
-	/**
-	 * @return OrderModel
-	 */
-	public function order()
-	{
-		static $order;
-		if(empty($order))
-		{
-			$order = new OrderModel($this->client);
-		}
-
-		return $order;
-	}
-
-
+    /**
+     * @return OrderModel
+     */
+    public function order(): OrderModel
+    {
+        return new OrderModel($this->client);
+    }
 }

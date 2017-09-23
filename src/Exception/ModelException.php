@@ -1,5 +1,6 @@
-<?php namespace Kuna\Exception;
+<?php
 
+namespace Kuna\Exception;
 
 /**
  * Class ModelException

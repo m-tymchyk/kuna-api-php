@@ -5,8 +5,8 @@ include "../vendor/autoload.php";
 use Kuna\Client;
 
 $client = new Client([
-	'publicKey' => "Your public key",
-	'secretKey' => "Your secret key"
+    'publicKey' => "Your public key",
+    'secretKey' => "Your secret key"
 ]);
 
 
@@ -27,7 +27,7 @@ echo sprintf("<h3>Tickers:</h3> <pre>%s</pre>>", print_r($tickers, true));
 /**
  * Order book
  */
-$order_book = $client->publicMethod()->order_book(\Kuna\Constant::MARKET_BTCUAH);
+$order_book = $client->publicMethod()->orderBook(\Kuna\Constant::MARKET_BTCUAH);
 echo sprintf("<h3>Order book:</h3> <br><pre>%s</pre>>", print_r($order_book, true));
 
 

@@ -1,5 +1,6 @@
-<?php namespace Kuna\Exception;
+<?php
 
+namespace Kuna\Exception;
 
 /**
  * Class EmptyResultException
@@ -7,5 +8,4 @@
  */
 class EmptyResultException extends KunaException
 {
-
 }
