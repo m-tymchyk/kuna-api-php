@@ -7,7 +7,7 @@
 [![GitHub stars](https://img.shields.io/github/stars/reilag/kuna-api-php.svg?style=flat-square)](https://github.com/reilag/kuna-api-php/stargazers)
 
 
-[![PHP Version](https://img.shields.io/badge/php-5.6%2B-blue.svg?style=flat-square)](http://www.php.net/)
+[![PHP Version](https://img.shields.io/badge/php-7.0%2B-blue.svg?style=flat-square)](http://www.php.net/)
 [![Guzzle Version](https://img.shields.io/badge/guzzle-6.2.0-green.svg?style=flat-square)](http://docs.guzzlephp.org/)
 [![Packagist](https://img.shields.io/badge/packagist-reilag%2Fkuna--api--php-orange.svg?style=flat-square)](https://packagist.org/packages/reilag/kuna-api-php)
 
@@ -178,8 +178,8 @@ Result:
 use Kuna\Client;
 
 $kuna = new Client([
-	'publicKey' => "Your public key",
-	'secretKey' => "Your secret key",
+	"publicKey" => "Your public key",
+	"secretKey" => "Your secret key",
 ]);
 
 $privateMethod = $kuna->privateMethod();
@@ -196,7 +196,7 @@ print_r($me);
 Result:
 ```json
 {
-    "email": 'your_email@email.com',
+    "email": "your_email@email.com",
     "activated": true,
     "accounts": [
         {
@@ -233,13 +233,13 @@ Result:
 ```json
 {
     "id": 3091,
-    "side": 'buy',
-    "ord_type": 'market',
+    "side": "buy",
+    "ord_type": "market",
     "price": 18000,
     "avg_price": 0,
-    "state": 'wait',
-    "market": 'btcuah',
-    "created_at": '2016-06-21T05:09:02Z',
+    "state": "wait",
+    "market": "btcuah",
+    "created_at": "2016-06-21T05:09:02Z",
     "volume": 0.1,
     "remaining_volume": 0.1,
     "executed_volume": 0,
@@ -265,13 +265,13 @@ Result:
 ```json
 {
     "id": 3091,
-    "side": 'buy',
-    "ord_type": 'market',
+    "side": "buy",
+    "ord_type": "market",
     "price": 18000,
     "avg_price": 18000,
-    "state": 'wait',
-    "market": 'btcuah',
-    "created_at": '2016-06-21T05:09:02Z',
+    "state": "wait",
+    "market": "btcuah",
+    "created_at": "2016-06-21T05:09:02Z",
     "volume": 0.1,
     "remaining_volume": 0.05,
     "executed_volume": 0.05,
@@ -294,26 +294,26 @@ Result:
 [
 	{
 	    "id": 3994,
-	    "side": 'buy',
-	    "ord_type": 'market',
+	    "side": "buy",
+	    "ord_type": "market",
 	    "price": 29000,
 	    "avg_price": 40000,
-	    "state": 'wait',
-	    "market": 'btcuah',
-	    "created_at": '2016-06-21T05:09:02Z',
+	    "state": "wait",
+	    "market": "btcuah",
+	    "created_at": "2016-06-21T05:09:02Z",
 	    "volume": 0.8,
 	    "remaining_volume": 0.109,
 	    "executed_volume": 0.691,
 	    "trades_count": 8
 	}, {
 	    "id": 40,
-	    "side": 'sell',
-	    "ord_type": 'market',
+	    "side": "sell",
+	    "ord_type": "market",
 	    "price": 28000,
 	    "avg_price": 29910,
-	    "state": 'wait',
-	    "market": 'btcuah',
-	    "created_at": '2016-06-21T05:09:02Z',
+	    "state": "wait",
+	    "market": "btcuah",
+	    "created_at": "2016-06-21T05:09:02Z",
 	    "volume": 0.5,
 	    "remaining_volume": 0.3,
 	    "executed_volume": 0.2,
