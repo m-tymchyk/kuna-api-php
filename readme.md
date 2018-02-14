@@ -279,12 +279,12 @@ Result:
 }
 ```
 
-### 3.4. Active orders
+### 3.4. Active order list
 
 ```php
 $orderMethod = $privateMethod->order();
 
-$orderList = $orderMethod->list(Constant::MARKET_BTCUAH);
+$orderList = $orderMethod->orderList(Constant::MARKET_BTCUAH);
 
 print_r($orderList);
 ```
