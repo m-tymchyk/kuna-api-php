@@ -284,9 +284,9 @@ Result:
 ```php
 $orderMethod = $privateMethod->order();
 
-$orderList = $orderMethod->list(Constant::MARKET_BTCUAH);
+$activeOrders = $orderMethod->active(Constant::MARKET_BTCUAH);
 
-print_r($orderList);
+print_r($activeOrders);
 ```
 
 Result:
