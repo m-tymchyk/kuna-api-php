@@ -60,7 +60,7 @@ class OrderModel extends PrivateModel
      *
      * @return array|null
      */
-    public function active($market = Constant::MARKET_BTCUAH)
+    public function orderList($market = Constant::MARKET_BTCUAH)
     {
         $request = new PrivateRequest('orders', ['market' => $market], 'GET');
         $result = $this->client->execute($request);
